@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build: . # 代表在 docker-compose.yml 檔案的所在資料夾, 尋找 Dockerfile 並且開始編譯成 docker image
+    ports:
+      - '5000:5000' # 第一個 5000 代表 Host port(也就是外部 port), 而第二個 5000 則代表 container 內部的 port
+    volumes:
+      - .:/code # 把當前資料夾 mount 掛載進去 container，這樣你可以直接在本地端專案資料夾改動檔案，container 裡面的檔案也會更動也不用重新 build image！
+  redis:
+    image: 'redis:alpine' # 從 Docker Hub registry 來的 image
