@@ -7,10 +7,10 @@ cache = redis.Redis(host='redis', port=6379)
 
 def get_hit_count():
      retries = 5
-     while True:
+     while True: # 檢查 try 運算式是否回傳 True
          try:
              return cache.incr('hits')
-         except redis.exceptions.ConnectionError as exc:
+         except redis.exceptions.ConnectionError as exc: # 如果不是 True 就執行 except 程式碼, 將 redis.exceptions.ConnectionError 當作 exc 來看
              if retries == 0:
                  raise exc
              retries -= 1
